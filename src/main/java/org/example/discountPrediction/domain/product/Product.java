@@ -4,46 +4,45 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.example.discountPrediction.domain.BaseTimeEntity;
+import org.example.discountPrediction.domain.price.Price;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
 @Entity
-public class Product extends BaseTimeEntity {
+public class Product extends BaseTimeEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(name="item_id")
     private int itemId;
-
+    private String img;
+    private String productName;
+    @Column(name="product_Url")
+    private String productUrl;
+    private String brand;
+    @Column(name="brand_Url")
+    private String brandUrl;
     @Column(columnDefinition = "SMALLINT")
     private int rank;
-
-    private String productName;
-
-    private String productUrl;
-
-    private String img;
-
-    private String brand;
-
-    private String brandUrl;
-
+    private String category;
+    private int realPrice;
     private LocalDateTime modifiedDate;
 
-    private String category;
-
-    private int realPrice;
+    @OneToMany(mappedBy = "product")
+    List<Price> prices = new ArrayList<>();
 
     @Builder
-    public Product(int item_id, int rank, String productName, String productUrl,
+    public Product(int itemId, int rank, String productName, String productUrl,
                    String img, String brand, String brandUrl, LocalDateTime modifiedDate,
-                   String category, int realPrice) {
-        this.itemId = item_id;
+                   String category, int realPrice, List<Price> prices) {
+        this.itemId = itemId;
         this.rank = rank;
         this.productName = productName;
         this.productUrl = productUrl;
@@ -53,5 +52,6 @@ public class Product extends BaseTimeEntity {
         this.modifiedDate = modifiedDate;
         this.category = category;
         this.realPrice = realPrice;
+        this.prices = prices;
     }
 }

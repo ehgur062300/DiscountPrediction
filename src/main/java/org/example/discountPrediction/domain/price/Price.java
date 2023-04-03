@@ -3,23 +3,21 @@ package org.example.discountPrediction.domain.price;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.example.discountPrediction.domain.BaseTimeEntity;
 import org.example.discountPrediction.domain.product.Product;
-import org.example.discountPrediction.domain.product.ProductRepository;
 
 import javax.persistence.*;
 
 @Getter
 @NoArgsConstructor
 @Entity
-public class Price extends BaseTimeEntity {
+public class Price {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id", referencedColumnName = "product_id",
+    @JoinColumn(name = "item_id", referencedColumnName = "item_id",
             foreignKey = @ForeignKey(value = ConstraintMode.NO_CONSTRAINT))
     private Product product;
 
