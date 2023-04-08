@@ -1,6 +1,5 @@
 package org.example.discountPrediction.domain.product;
 
-import org.example.discountPrediction.domain.price.Price;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,11 +28,11 @@ class ProductRepositoryTest {
     @Test
     public void 상품_정보_불러오기(){
         //given
-        int itemId = 19991223;
+        int productId = 19991223;
         int rank = 1;
 
         productRepository.save(Product.builder()
-                .itemId(itemId)
+                .productId(productId)
                 .rank(rank)
                 .realPrice(30000)
                 .productName("test")
@@ -49,30 +48,30 @@ class ProductRepositoryTest {
 
         //then
         Product product = productsList.get(0);
-        assertThat(product.getItemId()).isEqualTo(itemId);
+        assertThat(product.getProductId()).isEqualTo(productId);
         assertThat(product.getRank()).isEqualTo(rank);
     }
 
     @Test
     public void 브랜드_정보_불러오기(){
         //given
-        String brand = "brand";
+        String brand = "test";
 
         Product product1 = productRepository.save(Product.builder()
-                .itemId(1)
-                .brand("brand")
+                .productId(1)
+                .brand("test")
                 .realPrice(1000)
                 .build());
 
         Product product2 = productRepository.save(Product.builder()
-                .itemId(2)
+                .productId(2)
                 .brand("Nobrand")
                 .realPrice(1000)
                 .build());
 
         Product product3 = productRepository.save(Product.builder()
-                .itemId(3)
-                .brand("brand")
+                .productId(3)
+                .brand(brand)
                 .realPrice(1000)
                 .build());
 
@@ -80,7 +79,8 @@ class ProductRepositoryTest {
         List<Product> productList = productRepository.findAll();
 
         //then
-        System.out.println(productList.size());
+        System.out.println("size -> "+productList.size());
+        System.out.println("brand -> "+productList.get(2).getBrand());
         Product product = productList.get(2);
         assertThat(product.getBrand()).isEqualTo(brand);
 
@@ -93,7 +93,7 @@ class ProductRepositoryTest {
         String category = "000";
 
         productRepository.save(Product.builder()
-                .itemId(1)
+                .productId(1)
                 .brand("brand")
                 .category(category)
                 .realPrice(1000)
@@ -113,7 +113,7 @@ class ProductRepositoryTest {
 
         productRepository.save(Product.builder()
                 .productName(name)
-                .itemId(1)
+                .productId(1)
                 .brand("brand")
                 .category("category")
                 .realPrice(1000)
@@ -126,11 +126,11 @@ class ProductRepositoryTest {
         assertThat(product.get().getProductName()).isEqualTo(name);
     }
     @Test
-    public void BasaeTimeEntity_등록(){
+    public void BaseTimeEntity_등록(){
         //given
         LocalDateTime now = LocalDateTime.of(2019 , 6, 4, 0, 0, 0);
         productRepository.save(Product.builder()
-                .itemId(1)
+                .productId(1)
                 .productName("test")
                 .productUrl("test")
                 .brand("test")

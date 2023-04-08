@@ -3,18 +3,13 @@ package org.example.discountPrediction.web.dto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.example.discountPrediction.domain.price.Price;
 import org.example.discountPrediction.domain.product.Product;
-import org.example.discountPrediction.service.product.ProductService;
-
-import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 @NoArgsConstructor
 public class ProductSaveRequestDto {
 
-    private int itemId;
+    private int productId;
     private String img;
     private String productName;
     private String productUrl;
@@ -25,9 +20,9 @@ public class ProductSaveRequestDto {
     private int realPrice;
 
     @Builder
-    public ProductSaveRequestDto(int item_id, int rank, String productName, String productUrl,
+    public ProductSaveRequestDto(int productId, int rank, String productName, String productUrl,
                    String img, String brand, String brandUrl, String category, int realPrice) {
-        this.itemId = item_id;
+        this.productId = productId;
         this.rank = rank;
         this.productName = productName;
         this.productUrl = productUrl;
@@ -40,7 +35,7 @@ public class ProductSaveRequestDto {
 
     public Product toEntity(){
         return Product.builder()
-                .itemId(itemId)
+                .productId(productId)
                 .rank(rank)
                 .productName(productName)
                 .productUrl(productUrl)

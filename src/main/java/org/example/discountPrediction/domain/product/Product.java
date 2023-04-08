@@ -20,8 +20,8 @@ public class Product extends BaseTimeEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name="item_id")
-    private int itemId;
+    @Column(name="product_id")
+    private int productId;
     private String img;
     private String productName;
     @Column(name="product_Url")
@@ -39,10 +39,10 @@ public class Product extends BaseTimeEntity implements Serializable {
     List<Price> prices = new ArrayList<>();
 
     @Builder
-    public Product(int itemId, int rank, String productName, String productUrl,
+    public Product(int productId, int rank, String productName, String productUrl,
                    String img, String brand, String brandUrl, LocalDateTime modifiedDate,
                    String category, int realPrice, List<Price> prices) {
-        this.itemId = itemId;
+        this.productId = productId;
         this.rank = rank;
         this.productName = productName;
         this.productUrl = productUrl;

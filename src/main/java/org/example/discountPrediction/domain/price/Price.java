@@ -3,6 +3,7 @@ package org.example.discountPrediction.domain.price;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.example.discountPrediction.domain.BaseTimeEntity;
 import org.example.discountPrediction.domain.product.Product;
 
 import javax.persistence.*;
@@ -10,14 +11,14 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
-public class Price {
+public class Price extends BaseTimeEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "item_id", referencedColumnName = "item_id",
+    @JoinColumn(name = "product_id", referencedColumnName = "product_id",
             foreignKey = @ForeignKey(value = ConstraintMode.NO_CONSTRAINT))
     private Product product;
 

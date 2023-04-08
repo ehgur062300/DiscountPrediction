@@ -1,6 +1,7 @@
 package org.example.discountPrediction.service.product;
 
 import lombok.RequiredArgsConstructor;
+import org.apache.logging.log4j.util.ProcessIdUtil;
 import org.example.discountPrediction.domain.product.Product;
 import org.example.discountPrediction.domain.product.ProductRepository;
 import org.example.discountPrediction.web.dto.ProductListResponseDto;
@@ -45,9 +46,21 @@ public class ProductService {
                 () -> new IllegalArgumentException("해당 상품명은 존재하지 않습니다. productName = " + productName));
         return new ProductResponseDto(entity);
     }
+    public List<ProductListResponseDto> findAll(){
+        return productRepository.findAll().stream()
+                .map(ProductListResponseDto::new)
+                .collect(Collectors.toList());
+    }
     @Transactional(readOnly = true)
     public List<ProductListResponseDto> findAllDesc(){
         return productRepository.findAllDesc().stream()
+                .map(ProductListResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<ProductListResponseDto> search(String keyword){
+        return productRepository.search(keyword).stream()
                 .map(ProductListResponseDto::new)
                 .collect(Collectors.toList());
     }
