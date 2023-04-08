@@ -1,0 +1,57 @@
+{{> layout/header}}
+<h1>테스트 웹 서비스 Ver.1</h1>
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-6">
+            <a href="product/category/{category}" role="button" class="btn btn-primary" id="category-001">상의</a>
+            <a href="product/category/002" role="button" class="btn btn-primary" id="category-002">아우터</a>
+            <a href="product/category/003" role="button" class="btn btn-primary" id="category-003">바지</a>
+            <a href="product/category/004" role="button" class="btn btn-primary" id="category-004">가방</a>
+            <a href="product/category/018" role="button" class="btn btn-primary" id="category-018">스니커즈</a>
+            <a href="product/category/005" role="button" class="btn btn-primary" id="category-005">신발</a>
+            <a href="product/category/007" role="button" class="btn btn-primary" id="category-007">모자</a>
+            <a href="product/category/020" role="button" class="btn btn-primary" id="category-020">원피스</a>
+            <a href="product/category/022" role="button" class="btn btn-primary" id="category-022">스커트</a>
+            <a href="product/category/008" role="button" class="btn btn-primary" id="category-008">양말/레그웨이</a>
+        </div>
+        <form class="form-inline my-2 my-lg-0" id="searchForm" method="get">
+            <input class="form-control mr-sm-2" id="search" type="search" placeholder="키워드를 입력하세요" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" id="btn-search" type="submit">검색</button>
+        </form>
+    </div>
+
+
+    <br>
+    <!-- 목록 출력 영역 -->
+    <table class="table table-horizontal table-bordered">
+        <thead class="thead-strong">
+        <tr>
+            <th>id</th>
+            <th>product_id</th>
+            <th>이미지</th>
+            <th>상품명</th>
+            <th>브랜드</th>
+            <th>랭킹</th>
+            <th>카테고리</th>
+            <th>가격</th>
+            <th>수정 날짜</th>
+        </tr>
+        </thead>
+        <tbody id="tbody">
+        {{#products}}
+            <tr>
+                <td>{{id}}</td>
+                <td>{{productId}}</td>
+                <td><img src="{{img}}" style="width: 80px; height: 110px"></td>
+                <td><a href="{{productUrl}}">{{productName}}</a></td>
+                <td><a href="{{brandUrl}}">{{brand}}</a></td>
+                <td>rank.{{rank}}</td>
+                <td><a href="product/category/{{category}}">{{category}}</a></td>
+                <td>{{realPrice}}원</td>
+                <td>modifiedDate</td>
+            </tr>
+        {{/products}}
+        </tbody>
+    </table>
+</div>
+{{> layout/footer}}

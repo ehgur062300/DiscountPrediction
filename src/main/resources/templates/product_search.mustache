@@ -1,0 +1,49 @@
+{{> layout/header}}
+<h1>관련 상품</h1>
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-6">
+            <a href="#" role="button" class="btn btn-primary"></a>
+        </div>
+    </div>
+    <br>
+    <!-- 목록 출력 영역 -->
+    <table class="table table-horizontal table-bordered">
+        <thead class="thead-strong">
+        <tr>
+            <th>id</th>
+            <th>product_id</th>
+            <th>이미지</th>
+            <th>상품명</th>
+            <th>브랜드</th>
+            <th>랭킹</th>
+            <th>카테고리</th>
+            <th>가격</th>
+            <th>수정 날짜</th>
+        </tr>
+        </thead>
+        <tbody id="tbody">
+        {{#keyword}}
+            <tr>
+                <td>{{id}}</td>
+                <td>{{productId}}</td>
+                <td><img src="{{img}}" style="width: 80px; height: 110px"></td>
+                <td><a href="{{productUrl}}">{{productName}}</a></td>
+                <td><a href="{{brandUrl}}">{{brand}}</a></td>
+                <td>rank.{{rank}}</td>
+                <td>{{category}}</td>
+                <td>{{realPrice}}원</td>
+                <td>modifiedDate</td>
+            </tr>
+        {{/keyword}}
+        </tbody>
+    </table>
+</div>
+<style>
+    td, th {
+        text-align: center;
+        vertical-align: center;
+    }
+
+</style>
+{{> layout/footer}}
