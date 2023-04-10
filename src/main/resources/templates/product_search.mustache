@@ -2,8 +2,35 @@
 <h1>관련 상품</h1>
 <div class="col-md-12">
     <div class="row">
+        <a href="/" role="button" class="btn btn-secondary">메인화면</a>
         <div class="col-md-6">
-            <a href="#" role="button" class="btn btn-primary"></a>
+            <a href="001" role="button" class="btn btn-primary" id="001">상의</a>
+            <a href="002" role="button" class="btn btn-primary" id="002">아우터</a>
+            <a href="003" role="button" class="btn btn-primary" id="003">바지</a>
+            <a href="004" role="button" class="btn btn-primary" id="004">가방</a>
+            <a href="018" role="button" class="btn btn-primary" id="018">스니커즈</a>
+            <a href="005" role="button" class="btn btn-primary" id="005">신발</a>
+            <a href="007" role="button" class="btn btn-primary" id="007">모자</a>
+            <a href="020" role="button" class="btn btn-primary" id="020">원피스</a>
+            <a href="022" role="button" class="btn btn-primary" id="022">스커트</a>
+            <a href="008" role="button" class="btn btn-primary" id="008">양말/레그웨이</a>
+        </div>
+        <form class="form-inline my-2 my-lg-0" id="searchForm" method="get">
+            <input class="form-control mr-sm-2" id="search" type="search" placeholder="키워드를 입력하세요" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" id="btn-search" type="submit">검색</button>
+        </form>
+
+        <div style="margin-left: auto">
+            <!--로그인 기능 영역-->
+            {{#userName}}
+                Logged in as: <span id="user">{{userName}}</span>
+                <a href="/logout" class="btn btn-info active" role="button">Logout</a>
+            {{/userName}}
+            {{^userName}}
+                <a href="/oauth2/authorization/google" class="btn btn-success active" role="button">
+                    Google Login
+                </a>
+            {{/userName}}
         </div>
     </div>
     <br>

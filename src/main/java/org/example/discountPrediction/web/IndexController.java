@@ -1,6 +1,8 @@
 package org.example.discountPrediction.web;
 
 import lombok.RequiredArgsConstructor;
+import org.example.discountPrediction.domain.config.auth.LoginUser;
+import org.example.discountPrediction.domain.config.auth.dto.SessionUser;
 import org.example.discountPrediction.service.product.ProductService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,8 +15,12 @@ public class IndexController {
     private final ProductService productService;
 
     @GetMapping("/")
-    public String index(Model model){
-        model.addAttribute("products", productService.findAllDesc());
+    public String index(Model model, @LoginUser SessionUser user){
+        model.addAttribute("posts", productService.findAllDesc());
+
+        if(user != null){
+            model.addAttribute("userName", user.getName());
+        }
         return "index";
     }
 
