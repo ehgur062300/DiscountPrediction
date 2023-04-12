@@ -1,41 +1,40 @@
-plugins {
-    id 'org.springframework.boot' version '2.4.1'
-    id 'io.spring.dependency-management' version '1.0.10.RELEASE'
-    id 'java'
+buildscript {
+    ext {
+        springBootVersion = '2.1.7.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
 }
 
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
 group 'org.example'
-version '1.0.4-SNAPSHOT-'+ new Date().format("yyyyMMddHHmmss")
-sourceCompatibility = 1.8
+version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
     jcenter()
 }
 
-test {
-    useJUnitPlatform()
-}
-
 dependencies {
     implementation('org.springframework.boot:spring-boot-starter-web')
-    implementation('org.springframework.boot:spring-boot-starter-mustache')
-
-    // lombok
-    compileOnly("org.projectlombok:lombok:1.18.26")
-    testCompileOnly("org.projectlombok:lombok:1.18.26")
-    annotationProcessor("org.projectlombok:lombok:1.18.26")
-    testAnnotationProcessor("org.projectlombok:lombok:1.18.26")
-
-    // jpa
+    implementation('org.projectlombok:lombok')
     implementation('org.springframework.boot:spring-boot-starter-data-jpa')
-    implementation("org.mariadb.jdbc:mariadb-java-client")
+    implementation('org.springframework.boot:spring-boot-starter-oauth2-client')
+    implementation('org.springframework.boot:spring-boot-starter-mustache')
     implementation('com.h2database:h2')
+    implementation('org.springframework.session:spring-session-jdbc')
 
-    // oauth
-    implementation('org.springframework.boot:spring-boot-starter-oauth2-client') // 권한 관련
-    implementation('org.springframework.session:spring-session-jdbc') // 권한 관련
-
-    // test
-    testImplementation('org.springframework.boot:spring-boot-starter-test')
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+    testImplementation 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
 }
